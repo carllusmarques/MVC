@@ -1,0 +1,20 @@
+unit UclienteDao;
+
+interface
+
+uses
+  FireDAC.Comp.Client, uConexao, uClienteModel, System.SysUtils;
+
+  type
+  TClienteDao = class
+  private
+    FConexao: TConexao;
+  public
+    constructor Create;
+
+    function Obter: TFDQuery;
+  end;
+
+implementation
+
+end.

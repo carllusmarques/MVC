@@ -1,0 +1,91 @@
+unit uConexao;
+
+interface
+
+uses
+  FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Error, FireDAC.UI.Intf, FireDAC.Phys.Intf, FireDAC.Stan.Def,
+  FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, Data.DB, FireDAC.Comp.Client, FireDAC.Phys.MySQLDef,
+  FireDAC.Phys.MySQL, System.SysUtils, FireDAC.DApt, FireDAC.VCLUI.Wait,IniFiles;
+
+type
+  TConexao = class
+  private
+    class var FConn: TFDConnection;
+
+    procedure ConfigurarConexao;
+  public
+    constructor Create;
+    destructor Destroy; override;
+
+    class function GetConn: TFDConnection;
+    function CriarQuery: TFDQuery;
+  end;
+
+
+implementation
+
+{ TConexao }
+
+procedure TConexao.ConfigurarConexao;
+var
+  ArquivoINI: TIniFile;
+  Server,User_Name,Password,Port,Database,DriverId : string;
+begin
+
+  ArquivoINI := TIniFile.Create(ExtractFilePath(ParamStr(0))+'config.ini');
+
+  Server := ArquivoINI.ReadString('config', 'Server', 'Erro ao ler o server');
+  User_Name := ArquivoINI.ReadString('config', 'User_Name', 'Erro ao ler o User_Name');
+  Password := ArquivoINI.ReadString('config', 'Password', 'Erro ao ler o Password');
+  Port := ArquivoINI.ReadString('config', 'Port', 'Erro ao ler o Port');
+  Database := ArquivoINI.ReadString('config', 'Database', 'Erro ao ler o Database');
+  DriverId := ArquivoINI.ReadString('config', 'DriverId', 'Erro ao ler o DriverId');
+
+  ArquivoINI.Free;
+
+
+  FConn.Params.Clear;
+  FConn.Params.Add('Server='+Server);
+  FConn.Params.Add('User_Name='+User_Name);
+  FConn.Params.Add('Password='+Password);
+  FConn.Params.Add('Port='+Port);
+  FConn.Params.Add('Database='+Database);
+  FConn.Params.Add('DriverId='+DriverId);
+
+  FConn.LoginPrompt     := False;
+
+
+end;
+
+constructor TConexao.Create;
+begin
+  FConn := TFDConnection.Create(nil);
+
+  Self.ConfigurarConexao();
+end;
+
+function TConexao.CriarQuery: TFDQuery;
+var
+  VQuery: TFDQuery;
+begin
+  VQuery := TFDQuery.Create(nil);
+  VQuery.Connection := FConn;
+
+  Result := VQuery;
+end;
+
+destructor TConexao.Destroy;
+begin
+  FConn.Free;
+
+  inherited;
+end;
+
+class function TConexao.GetConn: TFDConnection;
+begin
+  if not Assigned(FConn) then
+     self.Create;
+  Result := FConn;
+end;
+
+end.
