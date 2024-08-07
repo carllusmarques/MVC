@@ -9,16 +9,19 @@ uses
   FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, FireDAC.Phys.MySQLDef,
   FireDAC.VCLUI.Wait, FireDAC.Comp.UI, FireDAC.Phys.MySQL, Data.DB,
   FireDAC.Comp.Client, FireDAC.Stan.Param, FireDAC.DatS, FireDAC.DApt.Intf,
-  FireDAC.DApt, FireDAC.Comp.DataSet, Vcl.Grids, Vcl.DBGrids, Vcl.StdCtrls;
+  FireDAC.DApt, FireDAC.Comp.DataSet, Vcl.Grids, Vcl.DBGrids, Vcl.StdCtrls,
+  Vcl.DBCtrls,UClienteController, UProdutosController;
 
 type
   TForm1 = class(TForm)
     DBGrid1: TDBGrid;
-    FDQuery1: TFDQuery;
     DataSource1: TDataSource;
-    Button1: TButton;
     FDMemTable1: TFDMemTable;
+    FDMemTable2: TFDMemTable;
+    DataSource2: TDataSource;
+    DBGrid2: TDBGrid;
     procedure FormCreate(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     { Private declarations }
   public
@@ -27,22 +30,37 @@ type
 
 var
   Form1: TForm1;
+  ClienteController : TClienteController;
+  ProdutosController : TProdutosController;
 
 implementation
 
 {$R *.dfm}
 
-uses uConexao, UClienteController;
+uses uConexao;
+
+procedure TForm1.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+      ClienteController.Free;
+      ProdutosController.Free;
+end;
 
 procedure TForm1.FormCreate(Sender: TObject);
-var
-  ClienteController : TClienteController;
 begin
   ClienteController := TClienteController.Create;
 
 
   FDMemTable1.Data := ClienteController.listar.Data;
   FDMemTable1.Open;
+
+
+  ProdutosController := TProdutosController.Create;
+
+
+  FDMemTable2.Data := ProdutosController.listar.Data;
+  FDMemTable2.Open;
+
+
 
 
 end;

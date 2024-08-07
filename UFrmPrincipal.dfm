@@ -10,13 +10,14 @@ object Form1: TForm1
   Font.Height = -12
   Font.Name = 'Segoe UI'
   Font.Style = []
+  OnClose = FormClose
   OnCreate = FormCreate
   TextHeight = 15
   object DBGrid1: TDBGrid
-    Left = 50
-    Top = 176
-    Width = 513
-    Height = 193
+    Left = 26
+    Top = 56
+    Width = 423
+    Height = 121
     DataSource = DataSource1
     TabOrder = 0
     TitleFont.Charset = DEFAULT_CHARSET
@@ -24,27 +25,46 @@ object Form1: TForm1
     TitleFont.Height = -12
     TitleFont.Name = 'Segoe UI'
     TitleFont.Style = []
+    Columns = <
+      item
+        Expanded = False
+        FieldName = 'nome'
+        Width = 100
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'cidade'
+        Width = 100
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'uf'
+        Width = 30
+        Visible = True
+      end>
   end
-  object Button1: TButton
-    Left = 488
-    Top = 104
-    Width = 75
-    Height = 25
-    Caption = 'Button1'
+  object DBGrid2: TDBGrid
+    Left = 26
+    Top = 240
+    Width = 423
+    Height = 121
+    DataSource = DataSource2
     TabOrder = 1
-  end
-  object FDQuery1: TFDQuery
-    SQL.Strings = (
-      'select  * from jogadores')
-    Left = 136
-    Top = 64
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -12
+    TitleFont.Name = 'Segoe UI'
+    TitleFont.Style = []
   end
   object DataSource1: TDataSource
     DataSet = FDMemTable1
-    Left = 208
-    Top = 64
+    Left = 80
+    Top = 8
   end
   object FDMemTable1: TFDMemTable
+    DetailFields = 'nome'
     FetchOptions.AssignedValues = [evMode]
     FetchOptions.Mode = fmAll
     ResourceOptions.AssignedValues = [rvSilentMode]
@@ -52,7 +72,24 @@ object Form1: TForm1
     UpdateOptions.AssignedValues = [uvCheckRequired, uvAutoCommitUpdates]
     UpdateOptions.CheckRequired = False
     UpdateOptions.AutoCommitUpdates = True
-    Left = 320
-    Top = 40
+    Left = 32
+    Top = 8
+  end
+  object FDMemTable2: TFDMemTable
+    DetailFields = 'nome'
+    FetchOptions.AssignedValues = [evMode]
+    FetchOptions.Mode = fmAll
+    ResourceOptions.AssignedValues = [rvSilentMode]
+    ResourceOptions.SilentMode = True
+    UpdateOptions.AssignedValues = [uvCheckRequired, uvAutoCommitUpdates]
+    UpdateOptions.CheckRequired = False
+    UpdateOptions.AutoCommitUpdates = True
+    Left = 32
+    Top = 192
+  end
+  object DataSource2: TDataSource
+    DataSet = FDMemTable2
+    Left = 80
+    Top = 192
   end
 end
