@@ -3,7 +3,7 @@ object Form1: TForm1
   Top = 0
   Caption = 'Form1'
   ClientHeight = 442
-  ClientWidth = 628
+  ClientWidth = 424
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -16,8 +16,8 @@ object Form1: TForm1
   object DBGrid1: TDBGrid
     Left = 26
     Top = 56
-    Width = 423
-    Height = 121
+    Width = 359
+    Height = 65
     DataSource = DataSource1
     TabOrder = 0
     TitleFont.Charset = DEFAULT_CHARSET
@@ -48,8 +48,8 @@ object Form1: TForm1
   object DBGrid2: TDBGrid
     Left = 26
     Top = 240
-    Width = 423
-    Height = 121
+    Width = 367
+    Height = 65
     DataSource = DataSource2
     TabOrder = 1
     TitleFont.Charset = DEFAULT_CHARSET

@@ -102,6 +102,13 @@
             <Form>Form1</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="DAO\uConexao.pas"/>
+        <DCCReference Include="MODEL\UclienteModel.pas"/>
+        <DCCReference Include="CONTROLLER\UClienteController.pas"/>
+        <DCCReference Include="DAO\UclienteDao.pas"/>
+        <DCCReference Include="CONTROLLER\UProdutosController.pas"/>
+        <DCCReference Include="MODEL\UProdutosModel.pas"/>
+        <DCCReference Include="DAO\UProdutosDao.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>
